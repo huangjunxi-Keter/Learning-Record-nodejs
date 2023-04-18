@@ -1,0 +1,1 @@
+console.log("通过 “node 文件名.后缀“ 运行js文件");
