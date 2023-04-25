@@ -11,7 +11,7 @@ const db = low(adapter);
 // 记账本列表
 router.get("/account", function (req, res, next) {
   // 获取所有的账单信息
-  let accouonts = db.get('accouonts').value();
+  let accouonts = db.get("accouonts").value();
   res.render("list", { accouonts });
 });
 
@@ -24,7 +24,6 @@ router.get("/account/create", function (req, res, next) {
 router.post("/account", (req, res) => {
   // 获取请求体的数据
   // console.log(req.body);
-
   // 生成 id
   let id = shortid.generate();
   // 写入文件
@@ -32,7 +31,17 @@ router.post("/account", (req, res) => {
     .unshift({ id, ...req.body })
     .write();
   // 成功提醒
-  res.render('success', { msg: ':) 添加成功', url: '/account'});
+  res.render("success", { msg: ":) 添加成功", url: "/account" });
+});
+
+// 删除记录
+router.get("/account/:id", (req, res) => {
+  // 获取 params 的 id 参数
+  let id = req.params.id;
+  // 删除
+  db.get("accouonts").remove({ id }).write();
+  // 成功提示
+  res.render("success", { msg: ":) 删除成功", url: "/account" });
 });
 
 module.exports = router;
