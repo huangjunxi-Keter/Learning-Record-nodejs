@@ -17,7 +17,7 @@ mongoose.connection.once("open", () => {
     price: Number,
     is_hot: Boolean,
     tags: Array,
-    pub_time: Date
+    pub_time: Date,
   });
 
   // 创建模型对象，对文档操作的封装对象
@@ -29,19 +29,19 @@ mongoose.connection.once("open", () => {
     author: "唐家三少",
     price: 25,
     is_hot: true,
-    tags: ['111', '222', '333w'],
-    pub_time: Date
-  }).then((err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
+    tags: ["111", "222", "333w"],
+    pub_time: Date,
+  })
+    .then((data) => {
       console.log(data);
-    }
-
-    // 关闭数据库连接
-    mongoose.disconnect();
-  });
+      // 关闭数据库连接
+      mongoose.disconnect();
+    })
+    .catch((err) => {
+      console.log(err);
+      // 关闭数据库连接
+      mongoose.disconnect();
+    });
 });
 
 // 设置连接错误回调

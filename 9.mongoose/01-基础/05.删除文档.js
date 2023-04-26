@@ -31,24 +31,22 @@ mongoose.connection.once("open", () => {
   let BookModel = mongoose.model("books", BookSchema);
 
   // 删除单条数据
-  // BookModel.deleteOne({ _id: "644773890e98e01f5809b4d0" }).then((err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //     return;
-  //   } else {
+  // BookModel.deleteOne({ _id: "644773890e98e01f5809b4d0" })
+  //   .then((data) => {
   //     console.log(data);
-  //   }
-  // });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 
   // 删除多条数据
-  BookModel.deleteMany({}).then((err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    } else {
+  BookModel.deleteMany({})
+    .then((data) => {
       console.log(data);
-    }
-  });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // 设置连接错误回调

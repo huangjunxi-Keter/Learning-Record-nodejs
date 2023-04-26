@@ -31,24 +31,22 @@ mongoose.connection.once("open", () => {
   let BookModel = mongoose.model("books", BookSchema);
 
   // 更新单条数据
-  // BookModel.updateOne({ name: "斗罗大陆" }, { price: 19 }).then((err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //     return;
-  //   } else {
+  // BookModel.updateOne({ name: "斗罗大陆" }, { price: 19 })
+  //   .then((data) => {
   //     console.log(data);
-  //   }
-  // });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 
   // 更新多条数据
-  BookModel.updateMany({}, { price: 20 }).then((err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    } else {
+  BookModel.updateMany({}, { price: 20 })
+    .then((data) => {
       console.log(data);
-    }
-  });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 // 设置连接错误回调

@@ -10,17 +10,17 @@ db(
       name: "绝世唐门",
       author: "唐家三少",
       price: 25,
-    }).then((err, data) => {
-      if (err) {
-        console.log(err);
-        return;
-      } else {
+    })
+      .then((data) => {
         console.log(data);
-      }
-
-      // 关闭数据库连接
-      mongoose.disconnect();
-    });
+        // 关闭数据库连接
+        mongoose.disconnect();
+      })
+      .catch((err) => {
+        console.log(err);
+        // 关闭数据库连接
+        mongoose.disconnect();
+      });
   },
   () => {
     console.error("连接失败");

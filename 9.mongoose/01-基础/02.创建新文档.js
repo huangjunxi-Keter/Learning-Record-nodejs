@@ -25,17 +25,17 @@ mongoose.connection.once("open", () => {
     name: "斗罗大陆",
     author: "唐家三少",
     price: 25,
-  }).then((err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
+  })
+    .then((data) => {
       console.log(data);
-    }
-
-    // 关闭数据库连接
-    mongoose.disconnect();
-  });
+      // 关闭数据库连接
+      mongoose.disconnect();
+    })
+    .catch((err) => {
+      console.log(err);
+      // 关闭数据库连接
+      mongoose.disconnect();
+    });
 });
 
 // 设置连接错误回调

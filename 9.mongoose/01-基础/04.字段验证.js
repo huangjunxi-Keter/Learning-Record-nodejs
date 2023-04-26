@@ -15,7 +15,7 @@ mongoose.connection.once("open", () => {
     name: {
       type: String,
       required: true, // 不能为空
-      unique: true // 唯一值（要生效必须重建集合，无法在旧的集合中使用）
+      unique: true, // 唯一值（要生效必须重建集合，无法在旧的集合中使用）
     },
     author: {
       type: String,
@@ -36,18 +36,18 @@ mongoose.connection.once("open", () => {
     name: "测试1",
     author: "测试1",
     price: 12,
-    style: '111'
-  }).then((err, data) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
+    style: "111",
+  })
+    .then((data) => {
       console.log(data);
-    }
-
-    // 关闭数据库连接
-    mongoose.disconnect();
-  });
+      // 关闭数据库连接
+      mongoose.disconnect();
+    })
+    .catch((err) => {
+      console.log(err);
+      // 关闭数据库连接
+      mongoose.disconnect();
+    });
 });
 
 // 设置连接错误回调
