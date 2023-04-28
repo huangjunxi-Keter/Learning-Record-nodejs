@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync(__dirname + "/../data/db.json");
-const shortid = require("shortid");
 const moment = require("moment");
-const AccountModel = require("../models/AccountModel");
-
-// 获取 db 对象
-const db = low(adapter);
+const AccountModel = require("../../models/AccountModel");
 
 // 记账本列表
 router.get("/account", function (req, res, next) {
