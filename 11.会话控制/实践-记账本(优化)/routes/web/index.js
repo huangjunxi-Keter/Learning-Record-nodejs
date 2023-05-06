@@ -3,8 +3,11 @@ const router = express.Router();
 const moment = require("moment");
 const AccountModel = require("../../models/AccountModel");
 
-// 记账本列表
-router.get("/account", function (req, res, next) {
+// 导入中间件，，检测是否登录
+let checkLoginMiddleware = require("../../middleware/checkLoginMiddleware");
+
+//#region 记账本列表
+router.get("/account", checkLoginMiddleware, function (req, res, next) {
   // 获取所有的账单信息
   // let accouonts = db.get("accouonts").value();
   // 获取数据库信息
@@ -14,14 +17,16 @@ router.get("/account", function (req, res, next) {
       res.render("list", { accouonts, moment });
     });
 });
+//#endregion
 
-// 添加记录(页面)
-router.get("/account/create", function (req, res, next) {
+//#region 添加记录(页面)
+router.get("/account/create", checkLoginMiddleware, function (req, res, next) {
   res.render("create");
 });
+//#endregion
 
-// 新增记录
-router.post("/account", (req, res) => {
+//#region 新增记录
+router.post("/account", checkLoginMiddleware, (req, res) => {
   // // 获取请求体的数据
   // console.log(req.body);
   // // 生成 id
@@ -41,9 +46,10 @@ router.post("/account", (req, res) => {
       res.status(500).send("添加失败!");
     });
 });
+//#endregion
 
-// 删除记录
-router.get("/account/:id", (req, res) => {
+//#region 删除记录
+router.get("/account/:id", checkLoginMiddleware, (req, res) => {
   // // 获取 params 的 id 参数
   // let id = req.params.id;
   // // 删除
@@ -54,5 +60,6 @@ router.get("/account/:id", (req, res) => {
     res.render("success", { msg: ":) 删除成功", url: "/account" });
   });
 });
+//#endregion
 
 module.exports = router;
