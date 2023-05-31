@@ -1,6 +1,7 @@
 /** token 验证中间件 */
 
 const jwt = require("jsonwebtoken");
+const { secret } = require('../config/config');
 
 module.exports = (req, res, next) => {
   // 获取 token
@@ -8,7 +9,7 @@ module.exports = (req, res, next) => {
 
   if (token) {
     // 校验 token
-    jwt.verify(token, "huangjunxi-Keter", (err, data) => {
+    jwt.verify(token, secret, (err, data) => {
       if (err) {
         res.json({
           code: "2004",
@@ -16,6 +17,9 @@ module.exports = (req, res, next) => {
           data: null,
         });
       } else {
+        // 保存用户信息
+        req.user = data;
+        // token 校验成功继续执行请求接口
         next();
       }
     });

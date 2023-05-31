@@ -3,6 +3,7 @@ const router = express.Router();
 const UserModel = require("../../models/UserModel");
 const md5 = require("md5");
 const jwt = require("jsonwebtoken");
+const { secret } = require("../../config/config");
 
 //#region 登录（操作）
 router.post("/login", (req, res) => {
@@ -16,7 +17,7 @@ router.post("/login", (req, res) => {
         // res.render("success", { msg: "登录成功", url: "/account" });
 
         /** 创建token */
-        let token = jwt.sign({ username: data.username }, "huangjunxi-Keter", {
+        let token = jwt.sign({ username: data.username }, secret, {
           expiresIn: 60 * 60 * 2.5,
         });
         /** 响应 toke */
